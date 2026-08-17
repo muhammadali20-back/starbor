@@ -84,6 +84,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Telegram sozlamalari
 TELEGRAM_BOT_TOKEN = '8944912940:AAEwGpqWTlZwOcuh0prgvGpj9CrdgcUR-jE'
