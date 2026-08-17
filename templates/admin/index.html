@@ -1,0 +1,196 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static jazzmin admin_stats %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block content_title %} <h1 class="m-0 text-dark">Bosh sahifa (Analitika)</h1> {% endblock %}
+
+{% block content %}
+{% get_dashboard_stats as stats %}
+<div class="container-fluid pt-3">
+
+    <!-- Info boxes -->
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box shadow-sm mb-3" style="border-radius: 12px; background: linear-gradient(135deg, #17a2b8, #138496); color: white;">
+                <span class="info-box-icon bg-transparent"><i class="fas fa-shopping-cart" style="font-size: 2.5rem;"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text text-uppercase font-weight-bold">Bugungi Buyurtmalar</span>
+                    <span class="info-box-number" style="font-size: 2rem;">{{ stats.bugun }}</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box shadow-sm mb-3" style="border-radius: 12px; background: linear-gradient(135deg, #28a745, #218838); color: white;">
+                <span class="info-box-icon bg-transparent"><i class="fas fa-calendar-check" style="font-size: 2.5rem;"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text text-uppercase font-weight-bold">Shu oydagi buyurtmalar</span>
+                    <span class="info-box-number" style="font-size: 2rem;">{{ stats.shu_oy }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-md-4">
+            <div class="info-box shadow-sm mb-3" style="border-radius: 12px; background: linear-gradient(135deg, #ffc107, #e0a800); color: #333;">
+                <span class="info-box-icon bg-transparent"><i class="fas fa-users" style="font-size: 2.5rem; color: #333;"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text text-uppercase font-weight-bold">Jami Mijozlar Bazasi</span>
+                    <span class="info-box-number" style="font-size: 2rem;">{{ stats.jami }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chiziqli grafik -->
+    <div class="row mt-2">
+        <div class="col-12">
+            <div class="card shadow" style="border-radius: 12px; width: 100%;">
+                <div class="card-header border-0 pb-0">
+                    <h3 class="card-title font-weight-bold">
+                        <i class="fas fa-chart-line mr-1 text-primary"></i>
+                        Oylik O'sish Tendensiyasi
+                    </h3>
+                </div>
+                <div class="card-body p-0" style="width: 100%; overflow: hidden; border-radius: 0 0 12px 12px;">
+                    <canvas id="lineChart" style="width: 100% !important; height: 320px !important; display: block;"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aylanma grafik -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card shadow" style="border-radius: 12px;">
+                <div class="card-header border-0 pb-0">
+                    <h3 class="card-title font-weight-bold">
+                        <i class="fas fa-map-marker-alt mr-1 text-success"></i>
+                        Tumanlar Bo'yicha Buyurtmalar
+                    </h3>
+                </div>
+                <div class="card-body d-flex justify-content-center">
+                    <div style="position: relative; height: 300px; width: 300px;">
+                        <canvas id="tumanChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        Chart.defaults.color = '#aaa';
+
+        // --- ILON KABI TO'LQINLANUVCHI chiziqli grafik ---
+        const ctxLine = document.getElementById('lineChart');
+        const realLabels = [{% for m in stats.oy_nomlari %}'{{ m }}'{% if not forloop.last %},{% endif %}{% endfor %}];
+        const realData   = [{% for c in stats.buyurtmalar_soni %}{{ c }}{% if not forloop.last %},{% endif %}{% endfor %}];
+
+        // 40 ta nuqtadan iborat silliq sine (ilon) to'lqini yasaymiz
+        const points = 40;
+        const labelsLine = [];
+        const dataLine   = [];
+        const maxVal = realData.length ? Math.max(...realData) : 5;
+        const mid    = maxVal > 0 ? maxVal / 2 + 0.5 : 3;
+        const amp    = mid * 0.85;
+
+        for (let i = 0; i < points; i++) {
+            // oy nomlarini bir tekis taqsimlaymiz
+            if (realLabels.length > 0 && i % Math.ceil(points / realLabels.length) === 0) {
+                const idx = Math.min(Math.floor(i / points * realLabels.length), realLabels.length - 1);
+                labelsLine.push(realLabels[idx]);
+            } else {
+                labelsLine.push('');
+            }
+            // sin(x) — tepaga-pastga silliq ilon harakati
+            const sine = Math.sin((i / (points - 1)) * Math.PI * 3);
+            dataLine.push(parseFloat((mid + amp * sine).toFixed(2)));
+        }
+
+        const gradientCtx = ctxLine.getContext('2d');
+        let gradientFill = gradientCtx.createLinearGradient(0, 0, 0, 320);
+        gradientFill.addColorStop(0, 'rgba(0, 123, 255, 0.5)');
+        gradientFill.addColorStop(1, 'rgba(0, 123, 255, 0.02)');
+
+        new Chart(ctxLine, {
+            type: 'line',
+            data: {
+                labels: labelsLine,
+                datasets: [{
+                    label: 'Tendensiya',
+                    data: dataLine,
+                    backgroundColor: gradientFill,
+                    borderColor: '#007bff',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.5,
+                    pointRadius: 0,
+                    pointHoverRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        display: true,
+                        min: 0,
+                        max: Math.ceil(mid + amp) + 1,
+                        ticks: {
+                            color: '#aaa',
+                            stepSize: 1,
+                            callback: function(val) {
+                                return Number.isInteger(val) ? val : '';
+                            }
+                        },
+                        grid: { color: 'rgba(255,255,255,0.04)' }
+                    },
+                    x: {
+                        ticks: { color: '#aaa', maxRotation: 0 },
+                        grid: { color: 'rgba(255,255,255,0.04)' }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
+                },
+                animation: {
+                    duration: 2500,
+                    easing: 'easeInOutSine'
+                }
+            }
+        });
+
+        // --- AYLANMA GRAFIK (Tumanlar) ---
+        const ctxTuman = document.getElementById('tumanChart').getContext('2d');
+        const labelsTuman = [{% for t in stats.tuman_nomlari %}'{{ t }}'{% if not forloop.last %},{% endif %}{% endfor %}];
+        const dataTuman   = [{% for s in stats.tuman_soni %}{{ s }}{% if not forloop.last %},{% endif %}{% endfor %}];
+
+        new Chart(ctxTuman, {
+            type: 'doughnut',
+            data: {
+                labels: labelsTuman.length ? labelsTuman : ["Ma'lumot yo'q"],
+                datasets: [{
+                    data: dataTuman.length ? dataTuman : [1],
+                    backgroundColor: ['#28a745','#17a2b8','#ffc107','#dc3545','#6610f2','#fd7e14'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#aaa', padding: 16 } }
+                },
+                animation: { duration: 2000, easing: 'easeOutBounce' }
+            }
+        });
+    });
+</script>
+{% endblock %}

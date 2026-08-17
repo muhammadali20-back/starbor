@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+*.zip
+db.sqlite3
+media/
+.pytest_cache/
+test_*.py
+test_*.txt

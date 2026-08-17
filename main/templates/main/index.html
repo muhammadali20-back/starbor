@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta name="google-site-verification" content="38Kcpbrd4BimuEsBspTnmC4g8AlMtUFGIrikgpsTDnU" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Starbor - Turkiya texnologiyasi asosida sepiladigan devor va tom izolyatsiyasi. O'zbekiston bo'ylab professional xizmat.">
+    <title>STARBOR | Professional Sepiladigan Izolyatsiya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <span>STAR</span>BOR
+            <div class="logo-sub">Turkiya Izolyatsiyasi</div>
+        </div>
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menyu ochish">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav id="nav-links">
+            <a href="#hero">Asosiy</a>
+            <a href="#about">Biz Haqimizda</a>
+            <a href="#features">Afzalliklari</a>
+            <a href="#areas">Qo'llash Sohalari</a>
+            <a href="#gallery">Galereya</a>
+            <a href="#why-us">Nima Uchun Biz?</a>
+            <a href="#faq">Savol-Javob</a>
+            <a href="#contact" class="btn-primary navbar-btn">Bog'lanish</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="badge">🔥 100% Sifat Kafolati</div>
+            <h1 class="fade-in-up">Binoingizni <span class="highlight">STARBOR</span> bilan izolyatsiya qiling!</h1>
+            <p class="fade-in-up delay-1">Yozda salqin, qishda issiq! Turkiyaning eng ilg'or poliuretan izolyatsiya xizmati. O'zbekistonning barcha viloyatlariga borib xizmat ko'rsatamiz.</p>
+            <div class="hero-actions fade-in-up delay-2">
+                <a href="#contact" class="btn-large">Biz bilan Bog'lanish</a>
+                <a href="https://t.me/yordam_korsatih_bot" target="_blank" class="btn-outline telegram-btn">✈️ Telegram Botga Yozish</a>
+            </div>
+            
+            <div class="stats-container fade-in-up delay-3">
+                <div class="stat">
+                    <h3>15+</h3>
+                    <span>Yillik Tajriba</span>
+                </div>
+                <div class="stat">
+                    <h3>1000+</h3>
+                    <span>Muvaffaqiyatli Obyektlar</span>
+                </div>
+                <div class="stat">
+                    <h3>20-25 Yil</h3>
+                    <span>Kafolat</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Biz Haqimizda Section -->
+    <section id="about" class="about">
+        <div class="section-header">
+            <h2>Biz <span class="highlight">Haqimizda</span></h2>
+            <p>STARBOR - bu sifat va ishonch kafolati</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p><strong>STARBOR</strong> — bu qurilish va ta'mirlash sohasida, xususan binolarni zamonaviy usulda izolyatsiya qilish bo'yicha yetakchi jamoa hisoblanadi. Biz Turkiyaning eng ilg'or texnologiyalari va 100% toza xomashyolaridan foydalangan holda xalqimiz uylariga issiqlik, qulaylik va xotirjamlik olib kiramiz.</p>
+                <p>Bizning bosh maqsadimiz — aholi va tadbirkorlarimizni qishning qahratonidan, yozning jaziramasidan va ortiqcha energiya sarfidan xalos qilish. 15 yillik tajribaga ega malakali ustalarimiz har qanday obyektdagi muammoli devor, tom yoki pollarni mukammal qoplab berishadi.</p>
+                <p>Sardorbek boshchiligidagi jamoamiz Andijon va boshqa barcha viloyatlarga borib, obyektni bepul o'lchab, hisob-kitob qilib berishga tayyor. Siz faqat natijadan zavq olasiz!</p>
+            </div>
+            <div class="about-img">
+                <img src="{% static 'main/img/insulation.png' %}" alt="Poliuretan izolyatsiya sepish jarayoni">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header">
+            <h2>Nima uchun <span class="highlight">STARBOR</span> ni tanlashadi?</h2>
+            <p>Boshqa izolyatsiya materiallaridan mutlaq ustunligimizni ko'ring</p>
+        </div>
+        <div class="cards-container">
+            {% for feature in features %}
+            <div class="card">
+                <div class="icon-wrap"><div class="icon">{{ feature.icon }}</div></div>
+                <h3>{{ feature.sarlavha }}</h3>
+                <p>{{ feature.matn }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Application Areas Section -->
+    <section id="areas" class="areas">
+        <div class="section-header">
+            <h2>Qo'llash <span class="highlight">Sohalari</span></h2>
+            <p>STARBOR izolyatsiyasi deyarli hamma joyda ishlatiladi</p>
+        </div>
+        <div class="cards-container">
+            {% for soha in sohalar %}
+            <div class="card">
+                <h3>{{ soha.icon }} {{ soha.nomi }}</h3>
+                <p>{{ soha.matn }}</p>
+            </div>
+            {% empty %}
+            <div class="card">
+                <h3>🏠 Uy va Kottejlar</h3>
+                <p>Tom, pol, devorlar va poydevorlarni issiq saqlash uchun.</p>
+            </div>
+            <div class="card">
+                <h3>🏭 Zavod va Fabrikalar</h3>
+                <p>Katta ishlab chiqarish angarlari va omborxonalar uchun.</p>
+            </div>
+            <div class="card">
+                <h3>❄️ Muzlatgichlar</h3>
+                <p>Haroratni aniq saqlab turish talab etiladigan xonalar uchun.</p>
+            </div>
+            <div class="card">
+                <h3>🐄 Chorvachilik</h3>
+                <p>Tovuqxonalar va molxonalar uchun mukammal iqlim nazorati.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="section-header">
+            <h2>Bizning <span class="highlight">Ishlarimiz</span></h2>
+            <p>STARBOR izolyatsiyasining haqiqiy natijalari — o'z ko'zingiz bilan ko'ring!</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="{% static 'main/img/real1.jpg' %}" alt="Devorga izolyatsiya sepish">
+                <div class="gallery-caption">Yog'och devorga sepish jarayoni</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'main/img/real2.png' %}" alt="Tom izolyatsiyasi natijasi">
+                <div class="gallery-caption">Tom ichini to'liq qoplash natijasi</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'main/img/real3.jpg' %}" alt="Bino izolyatsiyasi">
+                <div class="gallery-caption">Katta bino devori izolyatsiyasi</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'main/img/real4.jpg' %}" alt="Uy tashqi ko'rinishi">
+                <div class="gallery-caption">Uy tashqi devori — tayyor natija</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'main/img/insulation.png' %}" alt="Professional sepish jarayoni">
+                <div class="gallery-caption">Professional maxsus jihozlar bilan sepish</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'main/img/gallery_result.png' %}" alt="Tayyor natija">
+                <div class="gallery-caption">Tekis va choksiz tayyor natija</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'main/img/real5.jpg' %}" alt="Tom ichida izolyatsiya">
+                <div class="gallery-caption">Tom ichi — sepish jarayoni</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'main/img/real6.jpg' %}" alt="STARBOR jamoasi ish ustida">
+                <div class="gallery-caption">STARBOR jamoasi — katta angar izolyatsiyasi</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section id="why-us" class="why-us" style="background: var(--light); text-align: center;">
+        <div class="section-header">
+            <h2>Nima Uchun <span class="highlight">Aynan Biz?</span></h2>
+        </div>
+        <p style="font-size: clamp(1rem, 2.5vw, 1.2rem); max-width: 800px; margin: 0 auto; color: var(--text-light); line-height: 1.8;">
+            Bizning mutaxassislar O'zbekiston bo'ylab eng murakkab obyektlarni ham muvaffaqiyatli izolyatsiya qilgan. O'lchash va maslahat xizmatlari bepul. Xomashyoga qat'iy sifat nazorati o'rnatilgan. Eng yaxshisini tanlang!
+        </p>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing" style="background: var(--bg-color);">
+        <div class="section-header">
+            <h2>Bizning <span class="highlight">Narxlar</span></h2>
+            <p>Hamyonbop va 100% sifat kafolati bilan</p>
+        </div>
+        <div class="card" style="max-width: 650px; margin: 0 auto; text-align: center; border-top: 4px solid var(--primary); padding: clamp(2rem, 5vw, 3rem);">
+            <p style="color: var(--text-light); margin-bottom: 2rem; font-size: clamp(1rem, 2vw, 1.15rem); line-height: 1.7;">
+                Obyektning holati, ish hajmi va izolyatsiya qalinligiga qarab har bir mijoz uchun individual qulay narx belgilanadi. O'lchash va hisob-kitob qilish mutlaqo <b>BEPUL!</b>
+            </p>
+            <a href="#contact" class="btn-primary" style="padding: 1rem 2.5rem; font-size: 1.05rem;">Aniq narxni bilish</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq" style="background: var(--light);">
+        <div class="section-header">
+            <h2>Ko'p So'raladigan <span class="highlight">Savollar</span></h2>
+            <p>Mijozlarimizni qiziqtirgan asosiy savollarga javoblar</p>
+        </div>
+        <div style="max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.2rem;">
+            {% for faq in faqs %}
+            <div class="faq-item" style="background: var(--bg-color); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.04);">
+                <h3 style="color: var(--dark); margin-bottom: 0.5rem; font-size: 1.15rem;">{{ faq.savol }}</h3>
+                <p style="color: var(--text-light); font-size: 0.98rem; line-height: 1.6;">{{ faq.javob }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="contact-card">
+            <div class="section-header" style="margin-bottom: 2rem; text-align: left;">
+                <h2><span class="highlight">Bog'lanish</span></h2>
+                <p style="margin-top: 0.5rem;">Sardorbek — Bepul o'lchash va konsultatsiya!</p>
+            </div>
+            
+            <div class="contact-content">
+                <!-- Info part -->
+                <div class="contact-info">
+                    <div class="info-item">
+                        <div class="icon-box">📍</div>
+                        <div>
+                            <strong>Manzil:</strong>
+                            <span>Andijon va O'zbekistonning boshqa barcha viloyatlariga boramiz.</span>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon-box">📞</div>
+                        <div>
+                            <strong>Telefon raqam (Sardorbek):</strong>
+                            <a href="tel:+998999008885" class="phone-link">+998 99 900 88 85</a>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="icon-box">✈️</div>
+                        <div>
+                            <strong>Telegram Bot:</strong>
+                            <a href="https://t.me/aloqa_xizmat_korsatish_bot" target="_blank" style="color: #0088cc; font-weight: 600; text-decoration: none;">@aloqa_xizmat_korsatish_bot</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form part -->
+                <div class="contact-form-container">
+                    <h3 style="margin-bottom: 1.2rem; font-size: 1.35rem;">Mutaxassis bilan bog'laning</h3>
+                    
+                    <form id="telegramForm" onsubmit="sendToTelegram(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" id="ism" placeholder="Ismingiz" required>
+                                <div id="ismError" style="color:#ef4444; font-size:0.82rem; margin-top:0.3rem; display:none;"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="familiya" placeholder="Familiyangiz" required>
+                                <div id="familiyaError" style="color:#ef4444; font-size:0.82rem; margin-top:0.3rem; display:none;"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom: 0.8rem;">
+                            <input type="tel" id="phone" placeholder="+998 XX XXX XX XX" required>
+                            <div id="phoneError" style="color:#ef4444; font-size:0.82rem; margin-top:0.3rem; display:none;">❌ To'liq raqam kiriting: +998XXXXXXXXX (9 ta raqam)</div>
+                        </div>
+
+                        <div style="margin-bottom: 0.8rem;">
+                            <select id="location" required>
+                                <option value="" disabled selected>📍 Viloyat / Tumanni tanlang</option>
+                                <option value="Andijon shahar">🏙️ Andijon shahar</option>
+                                <option value="Asaka tumani">Asaka tumani</option>
+                                <option value="Baliqchi tumani">Baliqchi tumani</option>
+                                <option value="Bo'ston tumani">Bo'ston tumani</option>
+                                <option value="Buloqboshi tumani">Buloqboshi tumani</option>
+                                <option value="Jalolquduq tumani">Jalolquduq tumani</option>
+                                <option value="Xo'jaobod tumani">Xo'jaobod tumani</option>
+                                <option value="Izboskan tumani">Izboskan tumani</option>
+                                <option value="Qo'rg'ontepa tumani">Qo'rg'ontepa tumani</option>
+                                <option value="Marhamat tumani">Marhamat tumani</option>
+                                <option value="Oltinko'l tumani">Oltinko'l tumani</option>
+                                <option value="Paxtaobod tumani">Paxtaobod tumani</option>
+                                <option value="Shahrixon tumani">Shahrixon tumani</option>
+                                <option value="Ulug'nor tumani">Ulug'nor tumani</option>
+                                <option value="Boshqa viloyat">🌍 Boshqa viloyat</option>
+                            </select>
+                            <div id="locationError" style="color:#ef4444; font-size:0.82rem; margin-top:0.3rem; display:none;">❌ Iltimos, hududni tanlang!</div>
+                        </div>
+
+                        <div style="margin-bottom: 1.2rem;">
+                            <textarea id="message" placeholder="Boshqa ma'lumot yoki savollaringiz (ixtiyoriy)" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1.05rem;">Buyurtma Yuborish</button>
+                    </form>
+
+                    <div id="successMsg" style="display:none; margin-top: 1rem; text-align: center;">
+                        <div style="background: linear-gradient(135deg, #22c55e, #16a34a); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">✅</div>
+                            <div style="font-weight: 700; font-size: 1.2rem;">Buyurtmangiz qabul qilindi!</div>
+                            <div style="font-size: 0.95rem; margin-top: 0.5rem; opacity: 0.9;">⏱️ Tez orada siz bilan bog'lanamiz!</div>
+                        </div>
+
+                        <!-- Javob kutish bloki -->
+                        <div id="javobBox" style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; padding: 1.2rem; text-align: left;">
+                            <div style="font-weight: 600; color: #334155; margin-bottom: 0.8rem; font-size: 1rem;">💬 Mutaxassis javobi:</div>
+                            <div id="javoblar" style="min-height: 50px; color: #64748b; font-style: italic; font-size: 0.95rem;">
+                                ⏳ Javob kutilmoqda...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="color: white; font-size: 1.8rem; margin-bottom: 0.8rem;">
+                <span style="color: var(--primary);">STAR</span>BOR
+            </div>
+            <p>Turkiya sifatini o'z uyingizda his eting.</p>
+            <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.2rem;">
+                <p>&copy; 2026 STARBOR. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop" aria-label="Tepaga qaytish">↑</a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking on any nav link
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Back to Top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 250) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+        
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.card, .info-item, .faq-item, .about-content, .gallery-item').forEach((el) => {
+            el.classList.add('hidden');
+            observer.observe(el);
+        });
+
+        // Navbar shadow on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.navbar');
+            if(window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.92)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // TELEFON RAQAMI: +998 avtomatik qo'shish va faqat raqam qabul qilish
+        const phoneInput = document.getElementById('phone');
+
+        phoneInput.addEventListener('focus', function() {
+            if (!this.value.startsWith('+998')) {
+                this.value = '+998';
+            }
+        });
+
+        phoneInput.addEventListener('input', function() {
+            let val = this.value;
+            if (!val.startsWith('+998')) {
+                val = '+998';
+            }
+            let afterPrefix = val.slice(4).replace(/\D/g, '');
+            afterPrefix = afterPrefix.slice(0, 9);
+            this.value = '+998' + afterPrefix;
+        });
+
+        phoneInput.addEventListener('keydown', function(e) {
+            if ((e.key === 'Backspace' || e.key === 'Delete') && this.value.length <= 4) {
+                e.preventDefault();
+            }
+        });
+
+        // ISM VA FAMILIYA TEKSHIRUVI
+        function ismTekshir(id, errorId) {
+            const input = document.getElementById(id);
+            const errorEl = document.getElementById(errorId);
+            const val = input.value.trim();
+            const label = id === 'ism' ? 'Ism' : 'Familiya';
+            const faqatHarflar = /^[a-zA-ZʻʼА-Яа-яёЁA-Za-z'\-\s]+$/.test(val);
+
+            if (val.length === 0) {
+                errorEl.innerHTML = '❌ ' + label + 'ingizni kiriting!';
+                errorEl.style.display = 'block';
+                input.style.borderColor = '#ef4444';
+                return false;
+            } else if (val.length < 3) {
+                errorEl.innerHTML = '❌ ' + label + ' kamida 3 ta harf bo\'lishi kerak!';
+                errorEl.style.display = 'block';
+                input.style.borderColor = '#ef4444';
+                return false;
+            } else if (!faqatHarflar) {
+                errorEl.innerHTML = '❌ Faqat harf kiriting.';
+                errorEl.style.display = 'block';
+                input.style.borderColor = '#ef4444';
+                return false;
+            } else {
+                errorEl.style.display = 'none';
+                input.style.borderColor = '#22c55e';
+                return true;
+            }
+        }
+
+        document.getElementById('ism').addEventListener('input', () => ismTekshir('ism', 'ismError'));
+        document.getElementById('familiya').addEventListener('input', () => ismTekshir('familiya', 'familiyaError'));
+
+        // TELEGRAM VA BAZAGA XABAR YUBORISH
+        function sendToTelegram(e) {
+            e.preventDefault();
+
+            const ism = document.getElementById('ism').value.trim();
+            const familiya = document.getElementById('familiya').value.trim();
+            const name = ism + ' ' + familiya;
+            const phone = document.getElementById('phone').value.trim();
+            const location = document.getElementById('location').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            document.getElementById('phoneError').style.display = 'none';
+            document.getElementById('locationError').style.display = 'none';
+
+            let hasError = false;
+
+            if (!ismTekshir('ism', 'ismError')) hasError = true;
+            if (!ismTekshir('familiya', 'familiyaError')) hasError = true;
+
+            if (phone.length !== 13 || !phone.startsWith('+998')) {
+                document.getElementById('phoneError').style.display = 'block';
+                hasError = true;
+            }
+
+            if (!location) {
+                document.getElementById('locationError').style.display = 'block';
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            fetch('/send-contact/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ism: name, telefon: phone, manzil: location, xabar: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.ok) {
+                    document.getElementById('successMsg').style.display = 'block';
+                    document.getElementById('telegramForm').style.display = 'none';
+
+                    const buyurtmaId = data.buyurtma_id;
+                    let intervalId = setInterval(() => {
+                        fetch(`/javob-olish/${buyurtmaId}/`)
+                        .then(r => r.json())
+                        .then(d => {
+                            if(d.javoblar && d.javoblar.length > 0) {
+                                const javoblarDiv = document.getElementById('javoblar');
+                                javoblarDiv.innerHTML = '';
+                                d.javoblar.forEach(j => {
+                                    javoblarDiv.innerHTML += `
+                                        <div style="background: white; border-left: 4px solid var(--primary); padding: 0.8rem 1rem; border-radius: 0 8px 8px 0; margin-bottom: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.06);">
+                                            <div style="color: #334155; font-weight: 500;">${j.matn}</div>
+                                            <div style="color: #94a3b8; font-size: 0.8rem; margin-top: 0.3rem;">🕒 ${j.vaqt}</div>
+                                        </div>`;
+                                });
+                                clearInterval(intervalId);
+                            }
+                        });
+                    }, 10000);
+
+                    setTimeout(() => clearInterval(intervalId), 30 * 60 * 1000);
+                } else {
+                    alert('Xatolik yuz berdi: ' + (data.error || "Noma'lum xato."));
+                }
+            })
+            .catch(() => {
+                alert('Xatolik yuz berdi. Internet aloqangizni tekshiring.');
+            });
+        }
+    </script>
+</body>
+</html>
